@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ShareCompat;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -49,21 +50,30 @@ public class MainActivity extends AppCompatActivity
 
         inc.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                val++;
-                count.setText(Integer.toString(val));
+                modifyCount(1);
             }
         });
 
         dec.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                if (val > 0) {
-                    val--;
-                    count.setText(Integer.toString(val));
-                }
+                modifyCount(0);
             }
         });
     }
 
+    public void modifyCount(int what){
+        if (what == 1){
+            val++;
+            count.setText(Integer.toString(val));
+        }
+
+        else {
+            if (val > 0) {
+                val--;
+                count.setText(Integer.toString(val));
+            }
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
