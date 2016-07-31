@@ -39,5 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/count"
+        android:textSize="@dimen/count_font"
         android:text="0"/>
 </RelativeLayout>

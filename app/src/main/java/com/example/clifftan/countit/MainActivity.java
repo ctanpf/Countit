@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         count = (TextView) findViewById(R.id.count);
-        count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 80);
         inc = (Button) findViewById(R.id.inc);
         dec = (Button) findViewById(R.id.dec);
 
