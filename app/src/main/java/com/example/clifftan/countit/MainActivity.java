@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.app.ActionBar;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,10 +30,13 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private final int THEMEBLACK = 0;
     RelativeLayout bg;
     Button inc;
     Button dec;
     TextView count;
+    Window window;
+    ActionBar actionBar;
     int val = 0;
 
     @Override
@@ -39,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        actionBar = getSupportActionBar();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,8 +56,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //bg = (RelativeLayout) findViewById(R.id.bg);
-        //bg.setBackgroundColor(Color.parseColor("#000000"));
+        window = (Window) this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        bg = (RelativeLayout) findViewById(R.id.bg);
 
         count = (TextView) findViewById(R.id.count);
         count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 80);
@@ -68,6 +77,7 @@ public class MainActivity extends AppCompatActivity
         dec.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 modifyCount(0);
+                changeTheme(THEMEBLACK);
             }
         });
 
@@ -107,6 +117,19 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
+    public void changeTheme(int theme){
+        switch(theme){
+            case 0:
+                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorAccent2)));
+                bg.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark2));
+                window.setStatusBarColor(getResources().getColor(R.color.colorPrimary2));
+                break;
+
+        }
+    }
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
