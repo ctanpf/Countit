@@ -1,5 +1,10 @@
 package com.example.clifftan.countit;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,11 +21,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    RelativeLayout bg;
     Button inc;
     Button dec;
     TextView count;
@@ -43,10 +50,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //bg = (RelativeLayout) findViewById(R.id.bg);
+        //bg.setBackgroundColor(Color.parseColor("#000000"));
+
         count = (TextView) findViewById(R.id.count);
         count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 80);
         inc = (Button) findViewById(R.id.inc);
         dec = (Button) findViewById(R.id.dec);
+
 
         inc.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -59,6 +70,8 @@ public class MainActivity extends AppCompatActivity
                 modifyCount(0);
             }
         });
+
+
     }
 
     @Override
