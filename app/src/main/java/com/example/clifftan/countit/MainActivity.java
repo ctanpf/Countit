@@ -1,14 +1,7 @@
 package com.example.clifftan.countit;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.ActionBar;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -26,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,6 +33,9 @@ public class MainActivity extends AppCompatActivity
     ActionBar actionBar;
     int val = 0;
 
+    public interface EditNameDialogListener {
+        void onFinishEditDialog(String inputText);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        window = (Window) this.getWindow();
+        window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
@@ -66,8 +63,6 @@ public class MainActivity extends AppCompatActivity
         count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 80);
         inc = (Button) findViewById(R.id.inc);
         dec = (Button) findViewById(R.id.dec);
-
-
         inc.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 modifyCount(1);
@@ -81,8 +76,20 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        count.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (val != 0) {
+                    val = 0;
+                    count.setText("0");
+                }
+                return false;
+            }
+        });
+
 
     }
+
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
@@ -139,6 +146,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
