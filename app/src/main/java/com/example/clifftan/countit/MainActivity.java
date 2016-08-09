@@ -1,8 +1,11 @@
 package com.example.clifftan.countit;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,7 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +37,9 @@ public class MainActivity extends AppCompatActivity
     TextView count;
     Window window;
     ActionBar actionBar;
+    EditText incrementor;
     int val = 0;
 
-    public interface EditNameDialogListener {
-        void onFinishEditDialog(String inputText);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity
         count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 80);
         inc = (Button) findViewById(R.id.inc);
         dec = (Button) findViewById(R.id.dec);
+        incrementor = (EditText) findViewById(R.id.incrementor);
         inc.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 modifyCount(1);
@@ -87,8 +92,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
+        incrementor.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    // Do whatever you want here
+                    String counter = incrementor.getText().toString();
+                    Toast.makeText(getApplicationContext(), counter, Toast.LENGTH_SHORT).show();
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(incrementor.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
+
+
+
 
 
     @Override
