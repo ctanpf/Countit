@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private final int THEMEBLACK = 0;
+    private int incrementorInt = 1;
     RelativeLayout bg;
     Button inc;
     Button dec;
@@ -92,13 +93,25 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        incrementor.setText("");
+        incrementor.append("1");
         incrementor.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // Do whatever you want here
                     String counter = incrementor.getText().toString();
-                    Toast.makeText(getApplicationContext(), counter, Toast.LENGTH_SHORT).show();
+                    int checkCounter = Integer.parseInt(counter);
+                    String updateMessage = "";
+                    if (checkCounter < 0){
+                        updateMessage = "Counter need to be positive";
+                    }
+                    else{
+                        updateMessage = "Counter is updated to : " + counter;
+                        incrementorInt = checkCounter;
+                    }
+
+                    Toast.makeText(getApplicationContext(), updateMessage, Toast.LENGTH_SHORT).show();
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(incrementor.getWindowToken(), 0);
                     return true;
@@ -134,13 +147,13 @@ public class MainActivity extends AppCompatActivity
 
     public void modifyCount(int what){
         if (what == 1){
-            val++;
+            val = val + incrementorInt;
             count.setText(Integer.toString(val));
         }
 
         else {
             if (val > 0) {
-                val--;
+                val = val - incrementorInt;
                 count.setText(Integer.toString(val));
             }
         }
