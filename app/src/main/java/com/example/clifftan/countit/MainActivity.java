@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
@@ -212,18 +210,19 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Toast.makeText(getApplicationContext(), "Camera", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_gallery) {
-
+            Toast.makeText(getApplicationContext(), "Gallery", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_slideshow) {
-
+            Toast.makeText(getApplicationContext(), "Slideshow", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+            Toast.makeText(getApplicationContext(), "Tools", Toast.LENGTH_SHORT).show();
+        } /*else if (id == R.id.nav_share) {
+            Toast.makeText(getApplicationContext(), "Share", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_send) {
-
+            Toast.makeText(getApplicationContext(), "Send", Toast.LENGTH_SHORT).show();
         }
-
+*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
