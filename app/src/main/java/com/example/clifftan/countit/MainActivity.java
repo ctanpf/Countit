@@ -47,12 +47,13 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
+        /*
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        */
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         dec.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 modifyCount(0);
-                changeTheme(THEMEBLACK);
+                //changeTheme(THEMEBLACK);
             }
         });
 
@@ -157,6 +158,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /*
     public void changeTheme(int theme){
         switch(theme){
             case 0:
@@ -166,7 +168,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
         }
-    }
+    }*/
 
 
     @Override
