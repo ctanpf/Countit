@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "com.example.clifftan.countit"
+        applicationId "com.clifftan.countit"
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
